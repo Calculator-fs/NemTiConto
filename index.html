@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Minha Mayra 💕 1 Mês</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --gold:#d4af37;--gold-l:#f5e070;--pink:#ff2d78;--red:#ff0044;
@@ -14,7 +14,7 @@
 body{
   background:var(--bg);min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;overflow-x:hidden;
-  font-family:'Dancing Script',cursive;padding:20px;
+  font-family:'Montserrat', sans-serif;padding:20px;
 }
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;
@@ -33,7 +33,7 @@ body::before{
 .ttl h1{
   font-family:'Cinzel Decorative',cursive;font-size:clamp(1.4rem,5vw,2.8rem);
   color:var(--gold);
-  text-shadow:0 0 18px rgba(212,175,55,.9),0 0 40px rgba(212,175,55,.4),0 0 80px rgba(255,45,120,.3);
+  text-shadow:0 0 18px rgba(212,175,55,.9),0 0 40px rgba(212,175,55,.4);
   letter-spacing:.05em;line-height:1.3;
 }
 .ttl p{
@@ -42,28 +42,22 @@ body::before{
   text-shadow:0 0 12px rgba(255,179,209,.5);
 }
 
-/* WRAPPER */
-.mwrap{display:flex;align-items:center;gap:0;position:relative;z-index:10}
-
 /* MACHINE */
+.mwrap{display:flex;align-items:center;gap:0;position:relative;z-index:10}
 .machine{
   background:linear-gradient(160deg,#2d1040 0%,#1a0820 45%,#0d0515 100%);
   border:3px solid var(--gold);border-radius:22px 22px 32px 32px;
   padding:28px;width:clamp(310px,85vw,400px);
-  box-shadow:0 0 35px rgba(212,175,55,.3),0 0 70px rgba(212,175,55,.1),
-    inset 0 0 30px rgba(0,0,0,.5),0 25px 70px rgba(0,0,0,.85);
+  box-shadow:0 0 35px rgba(212,175,55,.3), inset 0 0 30px rgba(0,0,0,.5),0 25px 70px rgba(0,0,0,.85);
   transition:box-shadow .3s;
 }
 .machine.winning{
   animation:shake .55s ease-in-out;
-  box-shadow:0 0 80px rgba(255,45,120,.9),0 0 150px rgba(255,0,68,.5),
-    0 0 40px rgba(212,175,55,.6),inset 0 0 30px rgba(0,0,0,.5),0 25px 70px rgba(0,0,0,.85)!important;
+  box-shadow:0 0 80px rgba(255,45,120,.9),0 0 40px rgba(212,175,55,.6)!important;
 }
 @keyframes shake{
   0%{transform:translateX(0)}10%{transform:translateX(-6px) rotate(-1.2deg)}
-  20%{transform:translateX(6px) rotate(1.2deg)}30%{transform:translateX(-6px) rotate(-1deg)}
-  40%{transform:translateX(6px) rotate(1deg)}55%{transform:translateX(-3px)}
-  70%{transform:translateX(3px)}100%{transform:translateX(0)}
+  20%{transform:translateX(6px) rotate(1.2deg)}100%{transform:translateX(0)}
 }
 
 /* REELS */
@@ -72,14 +66,30 @@ body::before{
   background:linear-gradient(180deg,#000 0%,#060010 100%);
   border:2px solid rgba(212,175,55,.5);border-radius:14px;
   padding:10px;
-  box-shadow:inset 0 0 25px rgba(0,0,0,.9),0 0 18px rgba(212,175,55,.15);
+  box-shadow:inset 0 0 25px rgba(0,0,0,.9);
   margin-bottom:18px;
+  overflow: hidden;
 }
 .rwin{
   width:88px;height:240px;overflow:hidden;
-  border:2px solid rgba(212,175,55,.6);border-radius:10px;
+  border:1px solid rgba(212,175,55,0.3);border-radius:10px;
   position:relative;background:#000;
 }
+/* Reel middle highlight */
+.rwin::after {
+  content: '';
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  border-top: 2px solid rgba(212, 175, 55, 0.4);
+  border-bottom: 2px solid rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.05);
+  pointer-events: none;
+  z-index: 5;
+}
+
 .rstrip{display:flex;flex-direction:column;will-change:transform}
 .rcell{
   width:88px;height:80px;display:flex;align-items:center;justify-content:center;
@@ -114,80 +124,107 @@ body::before{
 /* CANVAS FOR EXPLOSION */
 #hcanvas{position:fixed;inset:0;pointer-events:none;z-index:100}
 
+/* MUSIC CONTROL POPUP */
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(26, 8, 32, 0.9);
+  border: 1px solid var(--gold);
+  border-radius: 50px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 300;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+.music-btn {
+  background: var(--gold);
+  color: black;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
 /* LETTER OVERLAY */
 .loverlay{
   position:fixed;inset:0;
-  background:rgba(0,0,0,.92);
-  backdrop-filter:blur(8px);
+  background:rgba(0,0,0,0.95);
+  backdrop-filter:blur(10px);
   z-index:200;display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .6s;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .8s;padding:20px;
 }
 .loverlay.vis{opacity:1;pointer-events:all}
 
 .letter-card{
-  background:linear-gradient(145deg,#2d0030 0%,#1a001a 50%,#200025 100%);
-  border:2px solid rgba(255,45,120,.5);border-radius:18px;
-  padding:clamp(20px,5vw,40px);
-  width:min(450px,90vw);
-  box-shadow:0 0 50px rgba(255,45,120,.45),inset 0 0 40px rgba(0,0,0,.4);
-  position:relative;overflow-y:auto;max-height:80vh;
-  transform:scale(.8) translateY(40px);
-  transition:transform .6s cubic-bezier(.175, .885, 0.32, 1.275);
-  z-index: 210;
+  background: #fff;
+  background-image: radial-gradient(#d2d0d0 1px, transparent 1px);
+  background-size: 20px 20px;
+  border-radius: 4px;
+  padding: 40px;
+  width: min(500px, 95vw);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 10px rgba(255,255,255,0.1);
+  position: relative;
+  overflow-y: auto;
+  max-height: 85vh;
+  transform: rotate(-2deg) scale(0.8);
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #333;
 }
-.loverlay.vis .letter-card{transform:scale(1) translateY(0)}
+.loverlay.vis .letter-card{transform: rotate(0deg) scale(1)}
 
 .letter-body{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size:clamp(0.95rem, 2.2vw, 1.15rem);
-  color:var(--textpink);line-height:1.7;text-align:left;min-height:100px;
-  white-space: pre-wrap;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  text-align: left;
 }
+.letter-body strong { color: var(--red); }
 
 .letter-greeting{
-  font-family:'Cinzel Decorative',cursive;font-size:1.4rem;
-  color:var(--gold);margin-bottom:15px;text-align:center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 
 /* FLYING PHOTOS */
 .flying-photo {
   position: fixed;
-  width: 160px;
+  width: 180px;
   height: auto;
-  border: 3px solid var(--gold);
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+  border: 5px solid white;
+  border-radius: 2px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.7);
   z-index: 205;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  transform: translate(-50%, -50%) scale(0);
   transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  pointer-events: none;
 }
 .flying-photo.show {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1) rotate(var(--rot));
-  pointer-events: all;
 }
 
 .close-btn{
-  position:absolute;top:15px;right:18px;
-  background:rgba(255,45,120,.15);border:1px solid rgba(255,45,120,.4);
-  color:var(--textpink);font-size:1.2rem;border-radius:50%;
-  width:34px;height:34px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  z-index:10;
+  position:absolute;top:10px;right:10px;
+  background: #eee; border: none;
+  color: #333; font-size: 1.5rem;
+  width: 30px; height: 30px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
 }
-
-/* WIN TEXT */
-.win-banner{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
-  z-index:160;font-family:'Cinzel Decorative',cursive;
-  font-size:clamp(2rem,8vw,4rem);color:var(--gold);
-  text-shadow:0 0 30px rgba(212,175,55,.9), 0 0 60px rgba(255,45,120,0.5);
-  transition:transform .5s cubic-bezier(.175,.885,.32,1.275);
-  pointer-events:none;
-}
-.win-banner.show{transform:translate(-50%,-50%) scale(1)}
 </style>
 </head>
 <body>
@@ -195,10 +232,15 @@ body::before{
 <canvas id="hcanvas"></canvas>
 <audio id="love-song" src="chicletinho.mp3" loop></audio>
 
+<div class="music-player">
+  <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">II</button>
+  <span>Chicletinho.mp3</span>
+</div>
+
 <div class="ttl">
     <h1>1 Mês de Namoro</h1>
-    <p>A melhor escolha da minha vida</p>
-    <div style="font-size:2rem; color:var(--gold); margin-top:10px;">Henrique & Mayra 💕</div>
+    <p>O começo da nossa história</p>
+    <div style="font-size:2rem; color:var(--gold); margin-top:10px; font-family:'Cinzel Decorative'">Henrique & Mayra</div>
 </div>
 
 <div class="mwrap">
@@ -208,7 +250,7 @@ body::before{
             <div class="rwin"><div class="rstrip" id="r2"></div></div>
             <div class="rwin"><div class="rstrip" id="r3"></div></div>
         </div>
-        <div style="text-align:center; color:var(--textpink); font-size:0.9rem;">Puxe a alavanca, meu amor!</div>
+        <div style="text-align:center; color:var(--textpink); font-size:0.9rem; font-family:'Montserrat'">Puxe a alavanca, meu amor!</div>
     </div>
 
     <div class="lever" onclick="pullLever()">
@@ -223,7 +265,6 @@ body::before{
 <div class="win-banner" id="winBanner">VOCÊ GANHOU! ❤️</div>
 
 <div class="loverlay" id="letterOverlay">
-    <!-- Photos scattered around -->
     <img src="img/foto1.png" class="flying-photo" id="fp1">
     <img src="img/foto2.png" class="flying-photo" id="fp2">
     <img src="img/foto3.png" class="flying-photo" id="fp3">
@@ -232,7 +273,7 @@ body::before{
 
     <div class="letter-card">
         <button class="close-btn" onclick="closeLetter()">&times;</button>
-        <div class="letter-greeting">Para minha princesa, Mayra</div>
+        <div class="letter-greeting">Minha querida Mayra,</div>
         <div class="letter-body" id="letterBody"></div>
     </div>
 </div>
@@ -249,7 +290,6 @@ function resize(){
 window.addEventListener('resize', resize);
 resize();
 
-// Floating Background Hearts
 function createBGHeart(){
   const h = document.createElement('div');
   h.className = 'bh';
@@ -261,20 +301,31 @@ function createBGHeart(){
 }
 setInterval(createBGHeart, 500);
 
-// Heart Explosion Logic
+function toggleMusic() {
+  const song = document.getElementById('love-song');
+  const btn = document.getElementById('playPauseBtn');
+  if (song.paused) {
+    song.play();
+    btn.textContent = 'II';
+  } else {
+    song.pause();
+    btn.textContent = '▶';
+  }
+}
+
 function explodeHearts() {
   const emojis = ['❤️','💕','💖','💗','💓','💝'];
-  for(let i=0; i<100; i++) {
+  for(let i=0; i<120; i++) {
     heartParticles.push({
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
-      vx: (Math.random() - 0.5) * 20,
-      vy: (Math.random() - 0.5) * 20 - 5,
-      size: Math.random() * 20 + 20,
+      vx: (Math.random() - 0.5) * 25,
+      vy: (Math.random() - 0.5) * 25 - 5,
+      size: Math.random() * 25 + 20,
       emoji: emojis[Math.floor(Math.random() * emojis.length)],
-      gravity: 0.2,
+      gravity: 0.25,
       alpha: 1,
-      decay: Math.random() * 0.01 + 0.005
+      decay: Math.random() * 0.01 + 0.008
     });
   }
   animateHearts();
@@ -283,34 +334,34 @@ function explodeHearts() {
 function animateHearts() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   heartParticles.forEach((p, index) => {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += p.gravity;
-    p.alpha -= p.decay;
-    
+    p.x += p.vx; p.y += p.vy; p.vy += p.gravity; p.alpha -= p.decay;
     ctx.globalAlpha = Math.max(0, p.alpha);
     ctx.font = `${p.size}px serif`;
     ctx.fillText(p.emoji, p.x, p.y);
-    
     if(p.alpha <= 0) heartParticles.splice(index, 1);
   });
   if(heartParticles.length > 0) requestAnimationFrame(animateHearts);
 }
 
-// Slot Machine
-const emojis_reel = ['❤️','💍','🌹','✨','🧸','💌'];
+const emojis_reel = ['❤️','💍','🌹','✨','🧸','💌','💎','💖'];
 const r1 = document.getElementById('r1');
 const r2 = document.getElementById('r2');
 const r3 = document.getElementById('r3');
 
 function fillReel(reel){
   reel.innerHTML = '';
-  for(let i=0; i<40; i++){
+  for(let i=0; i<60; i++){
     const div = document.createElement('div');
     div.className = 'rcell';
     div.innerHTML = emojis_reel[Math.floor(Math.random()*emojis_reel.length)];
     reel.appendChild(div);
   }
+  // Centering the heart at the winning position
+  // The reel window is 240px high, each cell is 80px.
+  // Middle position is at 80px from top.
+  // We will scroll to a point where child[index] is at top=80px.
+  // Transform Y = -(index * 80) + 80
+  reel.children[55].innerHTML = '❤️';
 }
 fillReel(r1); fillReel(r2); fillReel(r3);
 
@@ -328,76 +379,77 @@ function pullLever(){
     r.style.transition = 'none';
     r.style.transform = 'translateY(0)';
     r.offsetHeight; 
-    r.children[37].innerHTML = '❤️';
-    r.style.transition = `transform ${2 + i}s cubic-bezier(0.45, 0.05, 0.55, 0.95)`;
-    r.style.transform = 'translateY(-2960px)';
+    r.style.transition = `transform ${3 + i}s cubic-bezier(0.1, 0, 0.1, 1)`;
+    // Target index 55 to be in the middle (top: 80px)
+    // Transform = -(55 * 80) + 80 = -4400 + 80 = -4320
+    r.style.transform = 'translateY(-4320px)';
   });
 
   setTimeout(()=>{
     document.getElementById('winBanner').classList.add('show');
     document.getElementById('machine').classList.add('winning');
     explodeHearts();
-    const song = document.getElementById('love-song');
-    song.play().catch(e => console.log("Audio block: " + e));
-    
+    document.getElementById('love-song').play().catch(e => console.log(e));
     setTimeout(showLetter, 2000);
     spinning = false;
-  }, 4500);
+  }, 5500);
 }
 
 const letterText = `Desde que eu te conheci no Mushyoo, eu não consigo te tirar da minha mente... Você é a pessoa mais importante para mim.
 
-Cada mensagem sua ilumina meu dia de um jeito que eu nunca esperei. Cada momento com você, mesmo que seja pela tela, vale mais do que eu consigo expressar com palavras.
+Aquele encontro por acaso no Roblox se transformou na coisa mais real que eu já vivi. Esse primeiro mês ao seu lado foi uma descoberta constante de como é bom ter alguém como você. Cada conversa, cada risada e cada plano para o futuro me dão a certeza de que fiz a melhor escolha da minha vida.
 
-Esse mês foi o mais especial que eu já tive. Você apareceu do nada e mudou tudo — e eu agradeço todos os dias por isso. Não importa a distância, porque o que sinto por você é real, é lindo, e é todo meu.
+Você trouxe cores novas para o meu mundo. Não importa a distância física, porque o que construímos atravessa qualquer barreira. Você é meu porto seguro, minha melhor amiga e o amor que eu sempre quis encontrar.
 
-Feliz 1 mês de namoro, minha princesa. Eu te amo muito! ❤️`;
+Obrigado por ser essa mulher incrível. Que este seja apenas o primeiro de infinitos meses juntos.
+
+Com todo o meu amor,
+<strong>Henrique</strong>`;
 
 function showLetter(){
   const overlay = document.getElementById('letterOverlay');
   const body = document.getElementById('letterBody');
-  
-  body.textContent = '';
+  body.innerHTML = '';
   overlay.classList.add('vis');
 
-  // Scattering photos around the letter
   const positions = [
     { top: '20%', left: '15%', rot: '-15deg' },
-    { top: '15%', left: '80%', rot: '12deg' },
-    { top: '75%', left: '15%', rot: '10deg' },
-    { top: '80%', left: '85%', rot: '-12deg' },
-    { top: '50%', left: '88%', rot: '5deg' }
+    { top: '15%', left: '85%', rot: '12deg' },
+    { top: '80%', left: '15%', rot: '10deg' },
+    { top: '85%', left: '85%', rot: '-12deg' },
+    { top: '50%', left: '90%', rot: '5deg' }
   ];
 
   const photos = document.querySelectorAll('.flying-photo');
   photos.forEach((p, idx) => {
-    p.style.top = '50%';
-    p.style.left = '50%';
-    p.style.setProperty('--rot', '0deg');
-    
+    p.style.top = '50%'; p.style.left = '50%';
     setTimeout(() => {
       p.classList.add('show');
       p.style.top = positions[idx].top;
       p.style.left = positions[idx].left;
       p.style.setProperty('--rot', positions[idx].rot);
-    }, 500 + (idx * 200));
+    }, 500 + (idx * 250));
   });
 
   let i = 0;
   function type(){
     if(i < letterText.length){
-      body.textContent += letterText[i++];
-      setTimeout(type, 35);
+      if(letterText.substr(i, 8) === '<strong>') {
+        body.innerHTML += '<strong>Henrique</strong>';
+        i += 17;
+      } else {
+        body.innerHTML += letterText[i++];
+      }
+      setTimeout(type, 30);
     }
   }
-  setTimeout(type, 800);
+  setTimeout(type, 1000);
 }
 
 function closeLetter(){
   document.getElementById('letterOverlay').classList.remove('vis');
   document.getElementById('winBanner').classList.remove('show');
   document.getElementById('machine').classList.remove('winning');
-  document.getElementById('love-song').pause();
   document.querySelectorAll('.flying-photo').forEach(p => p.classList.remove('show'));
 }
 </script>
