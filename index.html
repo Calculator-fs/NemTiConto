@@ -120,64 +120,41 @@ body::before{
   transform:translateX(-50%);border-radius:3px;
 }
 
-/* ── POPUP (AS PER IMAGE & CODE) ── */
+/* ── COMPACT PINK/BLACK POPUP ── */
 #popup{
-  position:fixed;bottom:20px;left:50%;
-  transform:translateX(-50%) translateY(calc(100% + 50px));
-  width:min(380px,calc(100vw - 24px));
-  background:rgba(5,5,5,.94);
-  border:1px solid rgba(255,255,255,.1);border-radius:24px;
-  padding:22px;
-  backdrop-filter:blur(32px) saturate(1.6);
-  box-shadow:0 32px 90px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.04);
+  position:fixed;bottom:20px;right:20px;
+  width:280px;
+  background:rgba(10,0,15,.96);
+  border:1px solid var(--pink);border-radius:20px;
+  padding:15px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 15px 40px rgba(255,45,120,.2);
   z-index:300;opacity:0;
-  transition:transform .48s cubic-bezier(.34,1.56,.64,1),opacity .38s ease;
+  transform: translateY(100px);
+  transition: all .4s cubic-bezier(.34,1.56,.64,1);
   color: white;
 }
-#popup.on{transform:translateX(-50%) translateY(0);opacity:1}
+#popup.on{transform: translateY(0);opacity:1}
 
-.pt{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.pa{width:54px;height:54px;border-radius:12px;overflow:hidden;background:#111;flex-shrink:0;position:relative}
+.pt{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.pa{width:44px;height:44px;border-radius:8px;overflow:hidden;background:#000;flex-shrink:0;position:relative;border:1px solid var(--pink)}
 .pa img{width:100%;height:100%;object-fit:cover;display:block}
-.pa-r{
-  position:absolute;inset:0;border-radius:12px;
-  border:1px solid rgba(200,169,126,.3);
-  animation:spin 9s linear infinite paused;
-}
-.pa-r.sp{animation-play-state:running}
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 .pm{flex:1;min-width:0}
-.pm strong{display:block;font-size:13px;font-weight:400;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pm span{font-size:11px;color:var(--dim)}
-.px{background:none;border:none;cursor:pointer;color:var(--dim);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:color .2s,background .2s}
-.px:hover{color:var(--white);background:rgba(255,255,255,.08)}
-
-/* vis */
-#vis{width:100%;height:38px;border-radius:8px;margin-bottom:12px;background:rgba(255,255,255,.02); display: flex; align-items: center; justify-content: center; gap: 3px;}
-.bar { width: 3px; background: var(--gold); border-radius: 1px; animation: bounce 1s ease-in-out infinite alternate; }
-@keyframes bounce { from { height: 5px; } to { height: 25px; } }
+.pm strong{display:block;font-size:12px;font-weight:600;color:var(--pink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pm span{font-size:10px;color:var(--dim)}
 
 /* progress */
-.pg{height:3px;border-radius:99px;background:rgba(255,255,255,.08);cursor:pointer;position:relative;margin-bottom:8px}
-.pf{height:100%;border-radius:99px;width:0%;background:linear-gradient(90deg,var(--gold),#e8c97a);pointer-events:none}
-.pd{position:absolute;top:50%;left:0%;transform:translate(-50%,-50%) scale(0);width:12px;height:12px;border-radius:50%;background:#fff;pointer-events:none;transition:transform .15s}
-.pg:hover .pd{transform:translate(-50%,-50%) scale(1)}
+.pg{height:3px;border-radius:99px;background:rgba(255,45,120,.1);cursor:pointer;position:relative;margin-bottom:6px}
+.pf{height:100%;border-radius:99px;width:0%;background:var(--pink);pointer-events:none}
 
-.tr{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.15em;color:var(--dim);margin-bottom:14px}
+.tr{display:flex;justify-content:space-between;font-size:8px;color:var(--dim);margin-bottom:10px}
 
 /* controls */
-.ct{display:flex;align-items:center;justify-content:center;gap:22px;margin-bottom:16px}
-.cb{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;border-radius:50%;padding:6px;transition:color .2s,transform .18s}
-.cb:hover{color:var(--white);transform:scale(1.2)}
-.cb.pp{width:52px;height:52px;padding:0;background:var(--white);color:#000!important;border-radius:50%;box-shadow:0 4px 26px rgba(255,255,255,.18);transition:background .2s,transform .18s}
-.cb.pp:hover{background:#ddd;transform:scale(1.07)}
-
-/* vol */
-.vr{display:flex;align-items:center;gap:10px}
-.vr svg{color:var(--dim);flex-shrink:0}
-input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:3px;border-radius:99px;cursor:pointer;background:rgba(255,255,255,.1);outline:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;margin-top:0px;box-shadow:0 2px 8px rgba(0,0,0,.5);transition:transform .15s}
+.ct{display:flex;align-items:center;justify-content:center;gap:15px}
+.cb{background:none;border:none;cursor:pointer;color:var(--dim);font-size:1rem;transition:color .2s}
+.cb:hover{color:var(--pink)}
+.cb.pp{width:38px;height:38px;background:var(--pink);color:#fff!important;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px var(--pink)}
 
 /* LETTER OVERLAY (RESTORED NEON STYLE) */
 .loverlay{
@@ -257,30 +234,19 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 <canvas id="hcanvas"></canvas>
 <audio id="love-song" src="chicletinho.mp3" loop></audio>
 
-<!-- Correct Popup Style -->
+<!-- Compact Pink/Black Popup -->
 <div id="popup">
   <div class="pt">
     <div class="pa">
       <img src="img/foto1.png">
-      <div class="pa-r" id="disc"></div>
     </div>
     <div class="pm">
-      <strong>Vai Ser Só no Fodi Fodi</strong>
-      <span>música</span>
+      <strong>Chicletinho</strong>
+      <span>Henrique & Mayra</span>
     </div>
-    <button class="px" onclick="closeLetter()">&times;</button>
-  </div>
-  <div id="vis">
-    <div class="bar" style="animation-delay: 0.1s"></div>
-    <div class="bar" style="animation-delay: 0.3s"></div>
-    <div class="bar" style="animation-delay: 0.2s"></div>
-    <div class="bar" style="animation-delay: 0.5s"></div>
-    <div class="bar" style="animation-delay: 0.4s"></div>
-    <div class="bar" style="animation-delay: 0.1s"></div>
   </div>
   <div class="pg" onclick="seek(event)">
     <div class="pf" id="progressFill"></div>
-    <div class="pd" id="progressDot"></div>
   </div>
   <div class="tr">
     <span id="currentTime">0:00</span>
@@ -290,10 +256,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
     <button class="cb">⏮</button>
     <button class="cb pp" id="playBtn" onclick="toggleMusic()">▶</button>
     <button class="cb">⏭</button>
-  </div>
-  <div class="vr">
-    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/></svg>
-    <input type="range" min="0" max="1" step="0.1" value="1" oninput="setVolume(this.value)">
   </div>
 </div>
 
@@ -365,29 +327,22 @@ setInterval(createBGHeart, 500);
 const song = document.getElementById('love-song');
 const playBtn = document.getElementById('playBtn');
 const progressFill = document.getElementById('progressFill');
-const progressDot = document.getElementById('progressDot');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
-const disc = document.getElementById('disc');
 
 function toggleMusic() {
   if (song.paused) {
     song.play();
     playBtn.textContent = 'II';
-    disc.classList.add('sp');
   } else {
     song.pause();
     playBtn.textContent = '▶';
-    disc.classList.remove('sp');
   }
 }
-
-function setVolume(v) { song.volume = v; }
 
 song.ontimeupdate = () => {
   const pct = (song.currentTime / song.duration) * 100;
   progressFill.style.width = pct + '%';
-  progressDot.style.left = pct + '%';
   currentTimeEl.textContent = formatTime(song.currentTime);
 };
 
@@ -469,7 +424,6 @@ function pullLever(){
     explodeHearts();
     song.play().catch(e => console.log(e));
     playBtn.textContent = 'II';
-    disc.classList.add('sp');
     setTimeout(showLetter, 2000);
     spinning = false;
   }, 5500);
@@ -526,7 +480,6 @@ function closeLetter(){
   document.querySelectorAll('.flying-photo').forEach(p => p.classList.remove('show'));
   song.pause();
   playBtn.textContent = '▶';
-  disc.classList.remove('sp');
 }
 </script>
 </body>
