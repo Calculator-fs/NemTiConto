@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henrique & Mayra 💕 1 Mês</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-l: #f5e070;
+            --pink: #ff2d78;
+            --red: #ff0044;
+            --bg: #07000f;
+            --machine: #1a0820;
+            --heart: #ff1744;
+            --textpink: #ffb3d1;
+            --neon-blue: #00f2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+            overflow-x: hidden;
+            font-family: 'Dancing Script', cursive;
+            padding: 20px;
+            color: white;
+        }
+
+        /* Animated Background Particles */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Floating Hearts */
+        .bh {
+            position: fixed;
+            bottom: -60px;
+            font-size: 1.4rem;
+            opacity: 0;
+            pointer-events: none;
+            animation: fup linear infinite;
+        }
+
+        @keyframes fup {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(-110vh) rotate(400deg); opacity: 0; }
+        }
+
+        /* Header / Title */
+        .ttl {
+            text-align: center;
+            margin-bottom: 2.2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .ttl h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4);
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .ttl p {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            color: var(--textpink);
+            text-shadow: 0 0 10px rgba(255, 45, 120, 0.5);
+        }
+
+        .names {
+            font-size: clamp(2rem, 7vw, 4rem) !important;
+            display: block;
+            margin-top: 10px;
+            background: linear-gradient(90deg, var(--gold), var(--pink), var(--gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Slot Machine Wrapper */
+        .mwrap {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+            perspective: 1000px;
+        }
+
+        .machine {
+            background: linear-gradient(160deg, #2d1040 0%, #1a0820 45%, #0d0515 100%);
+            border: 4px solid var(--gold);
+            border-radius: 25px;
+            padding: 30px;
+            width: clamp(320px, 90vw, 420px);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3), 0 25px 70px rgba(0,0,0,0.9);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+
+        .machine:hover {
+            transform: rotateX(5deg);
+        }
+
+        .mtop-title {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.1rem;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        /* Reels */
+        .rc {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            background: #000;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,1);
+        }
+
+        .rwin {
+            width: 90px;
+            height: 240px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            position: relative;
+            background: #050505;
+        }
+
+        .rstrip {
+            display: flex;
+            flex-direction: column;
+            transition: transform 3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+
+        .rcell {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        /* Lever */
+        .lever {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .lv-track {
+            width: 24px;
+            height: 200px;
+            background: #111;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .lv-ball {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, var(--gold-l), var(--gold));
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--gold);
+            z-index: 5;
+            transition: top 0.2s;
+        }
+
+        .lv-shaft {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 8px;
+            height: 160px;
+            background: var(--gold);
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+
+        /* Envelope / Letter Animation */
+        .envelope-wrapper {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: #f3f3f3;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope .top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #ddd;
+            z-index: 3;
+            transform-origin: top;
+            transition: transform 0.6s 0.4s;
+        }
+
+        .envelope .bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid #f3f3f3;
+            border-right: 150px solid #f3f3f3;
+            border-bottom: 100px solid #e0e0e0;
+            z-index: 2;
+        }
+
+        .envelope .left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid transparent;
+            border-left: 150px solid #e8e8e8;
+            z-index: 2;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 280px;
+            height: 180px;
+            background: white;
+            z-index: 1;
+            transition: transform 0.8s;
+            padding: 20px;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* Open State */
+        .envelope.open .top {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-150px);
+            height: 450px;
+            width: 350px;
+            left: -25px;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow-y: auto;
+            border-radius: 5px;
+        }
+
+        /* Photos inside letter */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.1);
+            z-index: 20;
+        }
+
+        .letter-content {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .close-envelope {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Buttons */
+        .btn {
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--gold-l);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        /* Canvas for confetti */
+        #confetti {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="confetti"></canvas>
+    <audio id="love-song" src="chicletinho.mp3" loop></audio>
+
+    <div class="ttl">
+        <h1>1 Mês de Namoro</h1>
+        <p>A melhor escolha da minha vida</p>
+        <span class="names">Henrique & Mayra</span>
+    </div>
+
+    <div class="mwrap">
+        <div class="machine" id="machine">
+            <div class="mtop-title">SORTE NO AMOR</div>
+            <div class="rc">
+                <div class="rwin"><div class="rstrip" id="r1"></div></div>
+                <div class="rwin"><div class="rstrip" id="r2"></div></div>
+                <div class="rwin"><div class="rstrip" id="r3"></div></div>
+            </div>
+            <div style="text-align:center">
+                <p style="color:var(--textpink); font-size: 0.9rem; margin-bottom: 10px;">Puxe a alavanca para ganhar uma surpresa!</p>
+            </div>
+        </div>
+
+        <div class="lever" onclick="pullLever()">
+            <div class="lv-track">
+                <div class="lv-ball" id="lever-ball"></div>
+                <div class="lv-shaft"></div>
+            </div>
+            <div style="margin-top:10px; color:var(--gold); font-weight:bold;">PUXE</div>
+        </div>
+    </div>
+
+    <!-- Envelope Section -->
+    <div class="envelope-wrapper" id="envelope-wrapper">
+        <div class="close-envelope" onclick="closeEnvelope()">&times;</div>
+        <div class="envelope" id="envelope" onclick="openLetter()">
+            <div class="top"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+            <div class="letter">
+                <div class="letter-content">
+                    <h2 style="color:var(--red); margin-bottom: 10px;">Para o meu amor...</h2>
+                    <p>Henrique e Mayra, 1 mês de muitos que virão. Cada momento ao seu lado é um presente. Você me faz a pessoa mais feliz do mundo!</p>
+                    
+                    <div class="photo-gallery">
+                        <img src="img/foto1.png" alt="Nossa Foto 1">
+                        <img src="img/foto2.png" alt="Nossa Foto 2">
+                        <img src="img/foto3.png" alt="Nossa Foto 3">
+                        <img src="img/foto4.png" alt="Nossa Foto 4">
+                        <img src="img/foto5.png" alt="Nossa Foto 5">
+                    </div>
+                    
+                    <p style="margin-top: 20px; font-size: 1.5rem;">Eu te amo! ❤️</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Background Animation ---
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        let dots = [];
+
+        function resize() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Dot {
+            constructor() {
+                this.x = Math.random() * bgCanvas.width;
+                this.y = Math.random() * bgCanvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if(this.x < 0 || this.x > bgCanvas.width) this.vx *= -1;
+                if(this.y < 0 || this.y > bgCanvas.height) this.vy *= -1;
+            }
+            draw() {
+                bgCtx.beginPath();
+                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                bgCtx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+                bgCtx.fill();
+            }
+        }
+
+        for(let i=0; i<100; i++) dots.push(new Dot());
+
+        function animateBg() {
+            bgCtx.clearRect(0,0,bgCanvas.width, bgCanvas.height);
+            dots.forEach(d => { d.update(); d.draw(); });
+            requestAnimationFrame(animateBg);
+        }
+        animateBg();
+
+        // --- Floating Hearts ---
+        function createHeart() {
+            const h = document.createElement('div');
+            h.className = 'bh';
+            h.innerHTML = ['❤️','💖','💕','💗'][Math.floor(Math.random()*4)];
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
+
+        // --- Slot Machine Logic ---
+        const emojis = ['❤️', '💍', '🌹', '✨', '🧸', '🍫', '💌'];
+        const reels = [document.getElementById('r1'), document.getElementById('r2'), document.getElementById('r3')];
+        
+        function initReels() {
+            reels.forEach(r => {
+                r.innerHTML = '';
+                for(let i=0; i<30; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'rcell';
+                    div.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                    r.appendChild(div);
+                }
+            });
+        }
+        initReels();
+
+        let spinning = false;
+        function pullLever() {
+            if(spinning) return;
+            spinning = true;
+
+            // Lever animation
+            const ball = document.getElementById('lever-ball');
+            ball.style.top = '160px';
+            setTimeout(() => ball.style.top = '0', 300);
+
+            // Spin reels
+            reels.forEach((r, idx) => {
+                r.style.transition = 'none';
+                r.style.transform = 'translateY(0)';
+                
+                // Force reflow
+                r.offsetHeight;
+
+                r.style.transition = `transform ${2 + idx}s cubic-bezier(0.45, 0.05, 0.55, 0.95)`;
+                // Set the final result to hearts
+                const children = r.children;
+                children[children.length - 2].innerHTML = '❤️';
+                
+                r.style.transform = `translateY(-${(children.length - 3) * 80}px)`;
+            });
+
+            setTimeout(() => {
+                celebrate();
+                spinning = false;
+            }, 5000);
+        }
+
+        // --- Celebration & Envelope ---
+        const confettiCanvas = document.getElementById('confetti');
+        const cCtx = confettiCanvas.getContext('2d');
+        let particles = [];
+
+        function celebrate() {
+            const wrapper = document.getElementById('envelope-wrapper');
+            wrapper.style.display = 'flex';
+            
+            // Confetti explosion
+            for(let i=0; i<150; i++) {
+                particles.push({
+                    x: window.innerWidth/2,
+                    y: window.innerHeight/2,
+                    vx: (Math.random() - 0.5) * 15,
+                    vy: (Math.random() - 0.5) * 15 - 5,
+                    size: Math.random() * 10 + 5,
+                    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+                    gravity: 0.2,
+                    life: 1
+                });
+            }
+            animateConfetti();
+        }
+
+        function animateConfetti() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            cCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+            
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += p.gravity;
+                p.life -= 0.01;
+                
+                cCtx.fillStyle = p.color;
+                cCtx.globalAlpha = p.life;
+                cCtx.fillRect(p.x, p.y, p.size, p.size);
+                
+                if(p.life <= 0) particles.splice(i, 1);
+            });
+
+            if(particles.length > 0) requestAnimationFrame(animateConfetti);
+        }
+
+        function openLetter() {
+            document.getElementById('envelope').classList.add('open');
+            const song = document.getElementById('love-song');
+            song.play().catch(e => console.log("Erro ao tocar música: " + e));
+        }
+
+        function closeEnvelope() {
+            document.getElementById('envelope-wrapper').style.display = 'none';
+            document.getElementById('envelope').classList.remove('open');
+        }
+    </script>
+</body>
+</html>
