@@ -120,7 +120,7 @@ body::before{
   transform:translateX(-50%);border-radius:3px;
 }
 
-/* ── COMPACT PINK/BLACK POPUP ── */
+/* ── COMPACT PINK/BLACK POPUP WITH VOLUME ── */
 #popup{
   position:fixed;bottom:20px;right:20px;
   width:280px;
@@ -144,17 +144,25 @@ body::before{
 .pm strong{display:block;font-size:12px;font-weight:600;color:var(--pink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pm span{font-size:10px;color:var(--dim)}
 
-/* progress */
 .pg{height:3px;border-radius:99px;background:rgba(255,45,120,.1);cursor:pointer;position:relative;margin-bottom:6px}
 .pf{height:100%;border-radius:99px;width:0%;background:var(--pink);pointer-events:none}
 
 .tr{display:flex;justify-content:space-between;font-size:8px;color:var(--dim);margin-bottom:10px}
 
-/* controls */
-.ct{display:flex;align-items:center;justify-content:center;gap:15px}
+.ct{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:10px}
 .cb{background:none;border:none;cursor:pointer;color:var(--dim);font-size:1rem;transition:color .2s}
 .cb:hover{color:var(--pink)}
 .cb.pp{width:38px;height:38px;background:var(--pink);color:#fff!important;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px var(--pink)}
+
+/* Volume Control */
+.vr{display:flex;align-items:center;gap:10px;padding:0 5px}
+.vr svg{color:var(--pink);flex-shrink:0}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;height:3px;border-radius:99px;cursor:pointer;background:rgba(255,255,255,0.1);outline:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--pink);cursor:pointer;box-shadow:0 0 5px var(--pink);
+}
 
 /* LETTER OVERLAY (RESTORED NEON STYLE) */
 .loverlay{
@@ -257,6 +265,10 @@ body::before{
     <button class="cb pp" id="playBtn" onclick="toggleMusic()">▶</button>
     <button class="cb">⏭</button>
   </div>
+  <div class="vr">
+    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/></svg>
+    <input type="range" min="0" max="1" step="0.01" value="1" oninput="setVolume(this.value)">
+  </div>
 </div>
 
 <div class="ttl">
@@ -339,6 +351,8 @@ function toggleMusic() {
     playBtn.textContent = '▶';
   }
 }
+
+function setVolume(v) { song.volume = v; }
 
 song.ontimeupdate = () => {
   const pct = (song.currentTime / song.duration) * 100;
@@ -448,8 +462,8 @@ function showLetter(){
     { top: '20%', left: '15%', rot: '-15deg' },
     { top: '15%', left: '85%', rot: '12deg' },
     { top: '75%', left: '15%', rot: '10deg' },
-    { top: '70%', left: '80%', rot: '-12deg' }, // Moved up and left to avoid player
-    { top: '45%', left: '88%', rot: '5deg' }   // Moved up to avoid player
+    { top: '70%', left: '80%', rot: '-12deg' }, 
+    { top: '45%', left: '88%', rot: '5deg' }
   ];
 
   document.querySelectorAll('.flying-photo').forEach((p, idx) => {
