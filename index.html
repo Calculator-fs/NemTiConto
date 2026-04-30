@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Minha Mayra 💕 1 Mês</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --gold:#d4af37;--gold-l:#f5e070;--pink:#ff2d78;--red:#ff0044;
@@ -48,8 +48,7 @@ body::before{
   background:linear-gradient(160deg,#2d1040 0%,#1a0820 45%,#0d0515 100%);
   border:3px solid var(--gold);border-radius:22px 22px 32px 32px;
   padding:28px;width:clamp(310px,85vw,400px);
-  box-shadow:0 0 35px rgba(212,175,55,.3), inset 0 0 30px rgba(0,0,0,.5),0 25px 70px rgba(0,0,0,.85);
-  transition:box-shadow .3s;
+  box-shadow:0 0 35px rgba(212,175,55,0.3), inset 0 0 30px rgba(0,0,0,0.5),0 25px 70px rgba(0,0,0,0.85);
 }
 .machine.winning{
   animation:shake .55s ease-in-out;
@@ -66,7 +65,7 @@ body::before{
   background:linear-gradient(180deg,#000 0%,#060010 100%);
   border:2px solid rgba(212,175,55,.5);border-radius:14px;
   padding:10px;
-  box-shadow:inset 0 0 25px rgba(0,0,0,.9);
+  box-shadow:inset 0 0 25px rgba(0,0,0,0.9);
   margin-bottom:18px;
   overflow: hidden;
 }
@@ -75,7 +74,6 @@ body::before{
   border:1px solid rgba(212,175,55,0.3);border-radius:10px;
   position:relative;background:#000;
 }
-/* Reel middle highlight */
 .rwin::after {
   content: '';
   position: absolute;
@@ -89,7 +87,6 @@ body::before{
   pointer-events: none;
   z-index: 5;
 }
-
 .rstrip{display:flex;flex-direction:column;will-change:transform}
 .rcell{
   width:88px;height:80px;display:flex;align-items:center;justify-content:center;
@@ -121,92 +118,96 @@ body::before{
   transform:translateX(-50%);border-radius:3px;
 }
 
-/* CANVAS FOR EXPLOSION */
-#hcanvas{position:fixed;inset:0;pointer-events:none;z-index:100}
-
-/* MUSIC CONTROL POPUP */
-.music-player {
+/* MUSIC PLAYER (SPOTIFY STYLE) */
+.spotify-player {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: rgba(26, 8, 32, 0.9);
-  border: 1px solid var(--gold);
-  border-radius: 50px;
-  padding: 10px 20px;
+  width: 320px;
+  background: #121212;
+  border-radius: 12px;
+  padding: 15px;
+  color: white;
   display: flex;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column;
+  gap: 10px;
   z-index: 300;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  color: var(--gold);
-  font-size: 0.9rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  border: 1px solid rgba(255,255,255,0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
-.music-btn {
-  background: var(--gold);
-  color: black;
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+.spotify-player.show {
+  opacity: 1;
+  pointer-events: all;
+}
+.player-top { display: flex; align-items: center; gap: 12px; }
+.album-art {
+  width: 50px; height: 50px; border-radius: 6px;
+  background: url('img/foto1.png') center/cover;
+}
+.track-info { display: flex; flex-direction: column; }
+.track-name { font-weight: 600; font-size: 0.9rem; }
+.track-artist { font-size: 0.75rem; color: #b3b3b3; }
+
+.player-controls {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+}
+.main-controls { display: flex; align-items: center; gap: 20px; font-size: 1.2rem; }
+.play-btn {
+  width: 35px; height: 35px; border-radius: 50%; background: white;
+  color: black; border: none; display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
 }
+.progress-container { width: 100%; display: flex; align-items: center; gap: 8px; font-size: 0.7rem; color: #b3b3b3; }
+.progress-bar {
+  flex-grow: 1; height: 4px; background: #4f4f4f; border-radius: 2px; position: relative; cursor: pointer;
+}
+.progress-fill { width: 0%; height: 100%; background: white; border-radius: 2px; }
 
 /* LETTER OVERLAY */
 .loverlay{
   position:fixed;inset:0;
-  background:rgba(0,0,0,0.95);
-  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,0.92);
+  backdrop-filter:blur(8px);
   z-index:200;display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .8s;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .6s;padding:20px;
 }
 .loverlay.vis{opacity:1;pointer-events:all}
 
 .letter-card{
-  background: #fff;
-  background-image: radial-gradient(#d2d0d0 1px, transparent 1px);
-  background-size: 20px 20px;
-  border-radius: 4px;
-  padding: 40px;
-  width: min(500px, 95vw);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 10px rgba(255,255,255,0.1);
-  position: relative;
-  overflow-y: auto;
-  max-height: 85vh;
-  transform: rotate(-2deg) scale(0.8);
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  color: #333;
+  background:linear-gradient(145deg,#2d0030 0%,#1a001a 50%,#200025 100%);
+  border:2px solid rgba(255,45,120,.5);border-radius:18px;
+  padding:clamp(20px,5vw,40px);
+  width:min(450px,90vw);
+  box-shadow:0 0 50px rgba(255,45,120,.45),inset 0 0 40px rgba(0,0,0,0.4);
+  position:relative;overflow-y:auto;max-height:80vh;
+  transform:scale(.8) translateY(40px);
+  transition:transform .6s cubic-bezier(.175, .885, 0.32, 1.275);
+  z-index: 210;
 }
-.loverlay.vis .letter-card{transform: rotate(0deg) scale(1)}
+.loverlay.vis .letter-card{transform:scale(1) translateY(0)}
 
 .letter-body{
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  text-align: left;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:clamp(0.95rem, 2.2vw, 1.1rem);
+  color:var(--textpink);line-height:1.7;text-align:left;
+  white-space: pre-wrap;
 }
-.letter-body strong { color: var(--red); }
-
 .letter-greeting{
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-style: italic;
-  margin-bottom: 25px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
+  font-family:'Cinzel Decorative',cursive;font-size:1.4rem;
+  color:var(--gold);margin-bottom:15px;text-align:center;
 }
 
 /* FLYING PHOTOS */
 .flying-photo {
   position: fixed;
-  width: 180px;
+  width: 160px;
   height: auto;
-  border: 5px solid white;
-  border-radius: 2px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+  border: 3px solid var(--gold);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.9);
   z-index: 205;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0);
@@ -218,13 +219,24 @@ body::before{
 }
 
 .close-btn{
-  position:absolute;top:10px;right:10px;
-  background: #eee; border: none;
-  color: #333; font-size: 1.5rem;
-  width: 30px; height: 30px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 50%;
+  position:absolute;top:15px;right:18px;
+  background:rgba(255,45,120,.15);border:1px solid rgba(255,45,120,.4);
+  color:var(--textpink);font-size:1.2rem;border-radius:50%;
+  width:34px;height:34px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;
 }
+
+#hcanvas{position:fixed;inset:0;pointer-events:none;z-index:100}
+.win-banner{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  z-index:160;font-family:'Cinzel Decorative',cursive;
+  font-size:clamp(2rem,8vw,4rem);color:var(--gold);
+  text-shadow:0 0 30px rgba(212,175,55,.9);
+  transition:transform .5s cubic-bezier(.175,.885,.32,1.275);
+  pointer-events:none;
+}
+.win-banner.show{transform:translate(-50%,-50%) scale(1)}
 </style>
 </head>
 <body>
@@ -232,15 +244,35 @@ body::before{
 <canvas id="hcanvas"></canvas>
 <audio id="love-song" src="chicletinho.mp3" loop></audio>
 
-<div class="music-player">
-  <button class="music-btn" id="playPauseBtn" onclick="toggleMusic()">II</button>
-  <span>Chicletinho.mp3</span>
+<!-- Spotify-like Player -->
+<div class="spotify-player">
+  <div class="player-top">
+    <div class="album-art"></div>
+    <div class="track-info">
+      <span class="track-name">Chicletinho</span>
+      <span class="track-artist">Música</span>
+    </div>
+  </div>
+  <div class="player-controls">
+    <div class="main-controls">
+      <span style="cursor:pointer; color:#b3b3b3;">⏮</span>
+      <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶</button>
+      <span style="cursor:pointer; color:#b3b3b3;">⏭</span>
+    </div>
+    <div class="progress-container">
+      <span id="currentTime">0:00</span>
+      <div class="progress-bar" onclick="seek(event)">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span id="duration">3:11</span>
+    </div>
+  </div>
 </div>
 
 <div class="ttl">
     <h1>1 Mês de Namoro</h1>
-    <p>O começo da nossa história</p>
-    <div style="font-size:2rem; color:var(--gold); margin-top:10px; font-family:'Cinzel Decorative'">Henrique & Mayra</div>
+    <p>A melhor escolha da minha vida</p>
+    <div style="font-size:2rem; color:var(--gold); margin-top:10px;">Henrique & Mayra 💕</div>
 </div>
 
 <div class="mwrap">
@@ -250,7 +282,7 @@ body::before{
             <div class="rwin"><div class="rstrip" id="r2"></div></div>
             <div class="rwin"><div class="rstrip" id="r3"></div></div>
         </div>
-        <div style="text-align:center; color:var(--textpink); font-size:0.9rem; font-family:'Montserrat'">Puxe a alavanca, meu amor!</div>
+        <div style="text-align:center; color:var(--textpink); font-size:0.9rem;">Puxe a alavanca, meu amor!</div>
     </div>
 
     <div class="lever" onclick="pullLever()">
@@ -273,7 +305,7 @@ body::before{
 
     <div class="letter-card">
         <button class="close-btn" onclick="closeLetter()">&times;</button>
-        <div class="letter-greeting">Minha querida Mayra,</div>
+        <div class="letter-greeting">Para minha princesa, Mayra</div>
         <div class="letter-body" id="letterBody"></div>
     </div>
 </div>
@@ -301,31 +333,55 @@ function createBGHeart(){
 }
 setInterval(createBGHeart, 500);
 
+// Audio Logic
+const song = document.getElementById('love-song');
+const playBtn = document.getElementById('playBtn');
+const progressFill = document.getElementById('progressFill');
+const currentTimeEl = document.getElementById('currentTime');
+const durationEl = document.getElementById('duration');
+
 function toggleMusic() {
-  const song = document.getElementById('love-song');
-  const btn = document.getElementById('playPauseBtn');
   if (song.paused) {
     song.play();
-    btn.textContent = 'II';
+    playBtn.textContent = 'II';
   } else {
     song.pause();
-    btn.textContent = '▶';
+    playBtn.textContent = '▶';
   }
 }
 
+song.ontimeupdate = () => {
+  const pct = (song.currentTime / song.duration) * 100;
+  progressFill.style.width = pct + '%';
+  currentTimeEl.textContent = formatTime(song.currentTime);
+};
+
+song.onloadedmetadata = () => {
+  durationEl.textContent = formatTime(song.duration);
+};
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function seek(e) {
+  const rect = e.target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const pct = x / rect.width;
+  song.currentTime = pct * song.duration;
+}
+
+// Heart Explosion
 function explodeHearts() {
   const emojis = ['❤️','💕','💖','💗','💓','💝'];
-  for(let i=0; i<120; i++) {
+  for(let i=0; i<100; i++) {
     heartParticles.push({
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-      vx: (Math.random() - 0.5) * 25,
-      vy: (Math.random() - 0.5) * 25 - 5,
-      size: Math.random() * 25 + 20,
-      emoji: emojis[Math.floor(Math.random() * emojis.length)],
-      gravity: 0.25,
-      alpha: 1,
-      decay: Math.random() * 0.01 + 0.008
+      x: window.innerWidth / 2, y: window.innerHeight / 2,
+      vx: (Math.random() - 0.5) * 20, vy: (Math.random() - 0.5) * 20 - 5,
+      size: Math.random() * 20 + 20, emoji: emojis[Math.floor(Math.random() * emojis.length)],
+      gravity: 0.2, alpha: 1, decay: Math.random() * 0.01 + 0.005
     });
   }
   animateHearts();
@@ -343,10 +399,9 @@ function animateHearts() {
   if(heartParticles.length > 0) requestAnimationFrame(animateHearts);
 }
 
-const emojis_reel = ['❤️','💍','🌹','✨','🧸','💌','💎','💖'];
-const r1 = document.getElementById('r1');
-const r2 = document.getElementById('r2');
-const r3 = document.getElementById('r3');
+// Slot Machine
+const r1 = document.getElementById('r1'), r2 = document.getElementById('r2'), r3 = document.getElementById('r3');
+const emojis_reel = ['❤️','💍','🌹','✨','🧸','💌'];
 
 function fillReel(reel){
   reel.innerHTML = '';
@@ -356,11 +411,6 @@ function fillReel(reel){
     div.innerHTML = emojis_reel[Math.floor(Math.random()*emojis_reel.length)];
     reel.appendChild(div);
   }
-  // Centering the heart at the winning position
-  // The reel window is 240px high, each cell is 80px.
-  // Middle position is at 80px from top.
-  // We will scroll to a point where child[index] is at top=80px.
-  // Transform Y = -(index * 80) + 80
   reel.children[55].innerHTML = '❤️';
 }
 fillReel(r1); fillReel(r2); fillReel(r3);
@@ -369,19 +419,14 @@ let spinning = false;
 function pullLever(){
   if(spinning) return;
   spinning = true;
-
   const ball = document.getElementById('lever-ball');
   ball.style.top = '150px';
   setTimeout(()=> ball.style.top = '10px', 300);
 
-  const reels = [r1, r2, r3];
-  reels.forEach((r, i)=>{
-    r.style.transition = 'none';
-    r.style.transform = 'translateY(0)';
+  [r1, r2, r3].forEach((r, i)=>{
+    r.style.transition = 'none'; r.style.transform = 'translateY(0)';
     r.offsetHeight; 
     r.style.transition = `transform ${3 + i}s cubic-bezier(0.1, 0, 0.1, 1)`;
-    // Target index 55 to be in the middle (top: 80px)
-    // Transform = -(55 * 80) + 80 = -4400 + 80 = -4320
     r.style.transform = 'translateY(-4320px)';
   });
 
@@ -389,7 +434,8 @@ function pullLever(){
     document.getElementById('winBanner').classList.add('show');
     document.getElementById('machine').classList.add('winning');
     explodeHearts();
-    document.getElementById('love-song').play().catch(e => console.log(e));
+    song.play().catch(e => console.log(e));
+    playBtn.textContent = 'II';
     setTimeout(showLetter, 2000);
     spinning = false;
   }, 5500);
@@ -397,20 +443,18 @@ function pullLever(){
 
 const letterText = `Desde que eu te conheci no Mushyoo, eu não consigo te tirar da minha mente... Você é a pessoa mais importante para mim.
 
-Aquele encontro por acaso no Roblox se transformou na coisa mais real que eu já vivi. Esse primeiro mês ao seu lado foi uma descoberta constante de como é bom ter alguém como você. Cada conversa, cada risada e cada plano para o futuro me dão a certeza de que fiz a melhor escolha da minha vida.
+Cada mensagem sua ilumina meu dia de um jeito que eu nunca esperei. Cada momento com você, mesmo que seja pela tela, vale mais do que eu consigo expressar com palavras.
 
-Você trouxe cores novas para o meu mundo. Não importa a distância física, porque o que construímos atravessa qualquer barreira. Você é meu porto seguro, minha melhor amiga e o amor que eu sempre quis encontrar.
+Esse mês foi o mais especial que eu já tive. Você apareceu do nada e mudou tudo — e eu agradeço todos os dias por isso. Não importa a distância, porque o que sinto por você é real, é lindo, e é todo meu.
 
-Obrigado por ser essa mulher incrível. Que este seja apenas o primeiro de infinitos meses juntos.
-
-Com todo o meu amor,
-<strong>Henrique</strong>`;
+Feliz 1 mês de namoro, minha princesa. Eu te amo muito! ❤️`;
 
 function showLetter(){
-  const overlay = document.getElementById('letterOverlay');
-  const body = document.getElementById('letterBody');
-  body.innerHTML = '';
+  const overlay = document.getElementById('letterOverlay'), body = document.getElementById('letterBody');
+  const player = document.querySelector('.spotify-player');
+  body.textContent = '';
   overlay.classList.add('vis');
+  player.classList.add('show');
 
   const positions = [
     { top: '20%', left: '15%', rot: '-15deg' },
@@ -420,8 +464,7 @@ function showLetter(){
     { top: '50%', left: '90%', rot: '5deg' }
   ];
 
-  const photos = document.querySelectorAll('.flying-photo');
-  photos.forEach((p, idx) => {
+  document.querySelectorAll('.flying-photo').forEach((p, idx) => {
     p.style.top = '50%'; p.style.left = '50%';
     setTimeout(() => {
       p.classList.add('show');
@@ -434,23 +477,21 @@ function showLetter(){
   let i = 0;
   function type(){
     if(i < letterText.length){
-      if(letterText.substr(i, 8) === '<strong>') {
-        body.innerHTML += '<strong>Henrique</strong>';
-        i += 17;
-      } else {
-        body.innerHTML += letterText[i++];
-      }
-      setTimeout(type, 30);
+      body.textContent += letterText[i++];
+      setTimeout(type, 35);
     }
   }
-  setTimeout(type, 1000);
+  setTimeout(type, 800);
 }
 
 function closeLetter(){
   document.getElementById('letterOverlay').classList.remove('vis');
   document.getElementById('winBanner').classList.remove('show');
   document.getElementById('machine').classList.remove('winning');
+  document.querySelector('.spotify-player').classList.remove('show');
   document.querySelectorAll('.flying-photo').forEach(p => p.classList.remove('show'));
+  song.pause();
+  playBtn.textContent = '▶';
 }
 </script>
 </body>
