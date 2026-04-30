@@ -1,605 +1,346 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Henrique & Mayra 💕 1 Mês</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #d4af37;
-            --gold-l: #f5e070;
-            --pink: #ff2d78;
-            --red: #ff0044;
-            --bg: #07000f;
-            --machine: #1a0820;
-            --heart: #ff1744;
-            --textpink: #ffb3d1;
-            --neon-blue: #00f2ff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henrique & Mayra 💕 1 Mês</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#d4af37;--gold-l:#f5e070;--pink:#ff2d78;--red:#ff0044;
+  --bg:#07000f;--machine:#1a0820;--heart:#ff1744;--textpink:#ffb3d1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow-x:hidden;
+  font-family:'Dancing Script',cursive;padding:20px;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 20% 50%,rgba(255,45,120,.1) 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 50%,rgba(150,0,200,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 50% 0%,rgba(255,0,68,.06) 0%,transparent 45%);
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* FLOATING BG HEARTS */
+.bh{position:fixed;bottom:-60px;font-size:1.4rem;opacity:0;pointer-events:none;animation:fup linear infinite}
+@keyframes fup{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:.25}90%{opacity:.12}100%{transform:translateY(-105vh) rotate(400deg);opacity:0}}
 
-        body {
-            background: var(--bg);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items:center;
-            justify-content: center;
-            overflow-x: hidden;
-            font-family: 'Dancing Script', cursive;
-            padding: 20px;
-            color: white;
-        }
+/* TITLE */
+.ttl{text-align:center;margin-bottom:2.2rem;position:relative;z-index:10}
+.ttl h1{
+  font-family:'Cinzel Decorative',cursive;font-size:clamp(1.4rem,5vw,2.8rem);
+  color:var(--gold);
+  text-shadow:0 0 18px rgba(212,175,55,.9),0 0 40px rgba(212,175,55,.4),0 0 80px rgba(255,45,120,.3);
+  letter-spacing:.05em;line-height:1.3;
+}
+.ttl p{
+  font-family:'Dancing Script',cursive;font-size:clamp(1.1rem,3vw,1.6rem);
+  color:var(--textpink);margin-top:.6rem;
+  text-shadow:0 0 12px rgba(255,179,209,.5);
+}
 
-        /* Animated Background Particles */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
+/* WRAPPER */
+.mwrap{display:flex;align-items:center;gap:0;position:relative;z-index:10}
 
-        /* Floating Hearts */
-        .bh {
-            position: fixed;
-            bottom: -60px;
-            font-size: 1.4rem;
-            opacity: 0;
-            pointer-events: none;
-            animation: fup linear infinite;
-        }
+/* MACHINE */
+.machine{
+  background:linear-gradient(160deg,#2d1040 0%,#1a0820 45%,#0d0515 100%);
+  border:3px solid var(--gold);border-radius:22px 22px 32px 32px;
+  padding:28px;width:clamp(310px,85vw,400px);
+  box-shadow:0 0 35px rgba(212,175,55,.3),0 0 70px rgba(212,175,55,.1),
+    inset 0 0 30px rgba(0,0,0,.5),0 25px 70px rgba(0,0,0,.85);
+  transition:box-shadow .3s;
+}
+.machine.winning{
+  animation:shake .55s ease-in-out;
+  box-shadow:0 0 80px rgba(255,45,120,.9),0 0 150px rgba(255,0,68,.5),
+    0 0 40px rgba(212,175,55,.6),inset 0 0 30px rgba(0,0,0,.5),0 25px 70px rgba(0,0,0,.85)!important;
+}
+@keyframes shake{
+  0%{transform:translateX(0)}10%{transform:translateX(-6px) rotate(-1.2deg)}
+  20%{transform:translateX(6px) rotate(1.2deg)}30%{transform:translateX(-6px) rotate(-1deg)}
+  40%{transform:translateX(6px) rotate(1deg)}55%{transform:translateX(-3px)}
+  70%{transform:translateX(3px)}100%{transform:translateX(0)}
+}
 
-        @keyframes fup {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.2; }
-            100% { transform: translateY(-110vh) rotate(400deg); opacity: 0; }
-        }
+/* REELS */
+.rc{
+  display:flex;gap:8px;justify-content:center;
+  background:linear-gradient(180deg,#000 0%,#060010 100%);
+  border:2px solid rgba(212,175,55,.5);border-radius:14px;
+  padding:10px;
+  box-shadow:inset 0 0 25px rgba(0,0,0,.9),0 0 18px rgba(212,175,55,.15);
+  margin-bottom:18px;
+}
+.rwin{
+  width:88px;height:240px;overflow:hidden;
+  border:2px solid rgba(212,175,55,.6);border-radius:10px;
+  position:relative;background:#000;
+}
+.rstrip{display:flex;flex-direction:column;will-change:transform}
+.rcell{
+  width:88px;height:80px;display:flex;align-items:center;justify-content:center;
+  font-size:2.8rem;user-select:none;line-height:1;
+}
 
-        /* Header / Title */
-        .ttl {
-            text-align: center;
-            margin-bottom: 2.2rem;
-            position: relative;
-            z-index: 10;
-        }
+/* LEVER */
+.lever{
+  display:flex;flex-direction:column;align-items:center;
+  margin-left:18px;cursor:pointer;user-select:none;
+}
+.lv-track{
+  width:22px;height:190px;
+  background:linear-gradient(180deg,#1a0a1a,#0d0010);
+  border:2px solid rgba(212,175,55,.4);border-radius:11px;
+  position:relative;
+}
+.lv-ball{
+  position:absolute;top:10px;left:50%;
+  transform:translateX(-50%);
+  width:38px;height:38px;border-radius:50%;
+  background:radial-gradient(circle at 33% 33%,var(--gold-l),var(--gold) 55%,#7a5a10);
+  box-shadow:0 0 18px rgba(212,175,55,.7);
+  z-index:2;transition:top .2s;
+}
+.lv-shaft{
+  position:absolute;top:29px;left:50%;width:7px;height:145px;
+  background:linear-gradient(90deg,#7a5a10,var(--gold),#7a5a10);
+  transform:translateX(-50%);border-radius:3px;
+}
 
-        .ttl h1 {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: clamp(1.8rem, 6vw, 3.5rem);
-            color: var(--gold);
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4);
-            letter-spacing: 0.05em;
-            line-height: 1.2;
-            margin-bottom: 10px;
-        }
+/* CANVAS */
+#hcanvas{position:fixed;inset:0;pointer-events:none;z-index:100}
 
-        .ttl p {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            color: var(--textpink);
-            text-shadow: 0 0 10px rgba(255, 45, 120, 0.5);
-        }
+/* LETTER OVERLAY */
+.loverlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(6px);
+  z-index:200;display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .6s;padding:20px;
+}
+.loverlay.vis{opacity:1;pointer-events:all}
 
-        .names {
-            font-size: clamp(2rem, 7vw, 4rem) !important;
-            display: block;
-            margin-top: 10px;
-            background: linear-gradient(90deg, var(--gold), var(--pink), var(--gold));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-        }
+.letter-card{
+  background:linear-gradient(145deg,#2d0030 0%,#1a001a 50%,#200025 100%);
+  border:2px solid rgba(255,45,120,.5);border-radius:18px;
+  padding:clamp(20px,5vw,40px);
+  width:min(550px,95vw);
+  box-shadow:0 0 50px rgba(255,45,120,.45),inset 0 0 40px rgba(0,0,0,.4);
+  position:relative;overflow-y:auto;max-height:90vh;
+  transform:scale(.8) translateY(40px);
+  transition:transform .6s cubic-bezier(.175,.885,.32,1.275);
+}
+.loverlay.vis .letter-card{transform:scale(1) translateY(0)}
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+/* FONT DE PC (Sans-serif) PARA A CARTA */
+.letter-body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:clamp(1rem, 2.5vw, 1.2rem);
+  color:var(--textpink);line-height:1.6;text-align:left;min-height:100px;
+  white-space: pre-wrap;
+}
 
-        /* Slot Machine Wrapper */
-        .mwrap {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-            z-index: 10;
-            perspective: 1000px;
-        }
+.letter-greeting{
+  font-family:'Cinzel Decorative',cursive;font-size:1.5rem;
+  color:var(--gold);margin-bottom:15px;text-align:center;
+}
 
-        .machine {
-            background: linear-gradient(160deg, #2d1040 0%, #1a0820 45%, #0d0515 100%);
-            border: 4px solid var(--gold);
-            border-radius: 25px;
-            padding: 30px;
-            width: clamp(320px, 90vw, 420px);
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3), 0 25px 70px rgba(0,0,0,0.9);
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-        }
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+.photo-gallery.show { opacity: 1; }
+.photo-gallery img {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid var(--gold);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
 
-        .machine:hover {
-            transform: rotateX(5deg);
-        }
+.close-btn{
+  position:absolute;top:15px;right:18px;
+  background:rgba(255,45,120,.15);border:1px solid rgba(255,45,120,.4);
+  color:var(--textpink);font-size:1.2rem;border-radius:50%;
+  width:34px;height:34px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;
+}
 
-        .mtop-title {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 1.1rem;
-            color: var(--gold);
-            text-align: center;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px var(--gold);
-        }
-
-        /* Reels */
-        .rc {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            background: #000;
-            border: 2px solid rgba(212, 175, 55, 0.4);
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,1);
-        }
-
-        .rwin {
-            width: 90px;
-            height: 240px;
-            overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-            position: relative;
-            background: #050505;
-        }
-
-        .rstrip {
-            display: flex;
-            flex-direction: column;
-            transition: transform 3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-        }
-
-        .rcell {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        /* Lever */
-        .lever {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .lv-track {
-            width: 24px;
-            height: 200px;
-            background: #111;
-            border: 2px solid var(--gold);
-            border-radius: 12px;
-            position: relative;
-        }
-
-        .lv-ball {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: radial-gradient(circle at 30% 30%, var(--gold-l), var(--gold));
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--gold);
-            z-index: 5;
-            transition: top 0.2s;
-        }
-
-        .lv-shaft {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            width: 8px;
-            height: 160px;
-            background: var(--gold);
-            transform: translateX(-50%);
-            border-radius: 4px;
-        }
-
-        /* Envelope / Letter Animation */
-        .envelope-wrapper {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .envelope {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            background: #f3f3f3;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            cursor: pointer;
-            transition: transform 0.5s;
-        }
-
-        .envelope:hover {
-            transform: scale(1.05);
-        }
-
-        .envelope .top {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 100px solid #ddd;
-            z-index: 3;
-            transform-origin: top;
-            transition: transform 0.6s 0.4s;
-        }
-
-        .envelope .bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid #f3f3f3;
-            border-right: 150px solid #f3f3f3;
-            border-bottom: 100px solid #e0e0e0;
-            z-index: 2;
-        }
-
-        .envelope .left {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-top: 100px solid transparent;
-            border-bottom: 100px solid transparent;
-            border-left: 150px solid #e8e8e8;
-            z-index: 2;
-        }
-
-        .letter {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            width: 280px;
-            height: 180px;
-            background: white;
-            z-index: 1;
-            transition: transform 0.8s;
-            padding: 20px;
-            color: #333;
-            overflow: hidden;
-        }
-
-        /* Open State */
-        .envelope.open .top {
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
-
-        .envelope.open .letter {
-            transform: translateY(-150px);
-            height: 450px;
-            width: 350px;
-            left: -25px;
-            z-index: 10;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow-y: auto;
-            border-radius: 5px;
-        }
-
-        /* Photos inside letter */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .photo-gallery img {
-            width: 100%;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-        }
-
-        .photo-gallery img:hover {
-            transform: scale(1.1);
-            z-index: 20;
-        }
-
-        .letter-content {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.2rem;
-            line-height: 1.4;
-            text-align: center;
-        }
-
-        .close-envelope {
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        /* Buttons */
-        .btn {
-            background: var(--gold);
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            font-family: 'Cinzel Decorative', cursive;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background: var(--gold-l);
-            box-shadow: 0 0 15px var(--gold);
-        }
-
-        /* Canvas for confetti */
-        #confetti {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 2000;
-        }
-    </style>
+/* WIN TEXT */
+.win-banner{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  z-index:160;font-family:'Cinzel Decorative',cursive;
+  font-size:clamp(2rem,8vw,4rem);color:var(--gold);
+  text-shadow:0 0 30px rgba(212,175,55,.9);
+  transition:transform .5s cubic-bezier(.175,.885,.32,1.275);
+  pointer-events:none;
+}
+.win-banner.show{transform:translate(-50%,-50%) scale(1)}
+</style>
 </head>
 <body>
 
-    <canvas id="bg-canvas"></canvas>
-    <canvas id="confetti"></canvas>
-    <audio id="love-song" src="chicletinho.mp3" loop></audio>
+<canvas id="hcanvas"></canvas>
+<audio id="love-song" src="chicletinho.mp3" loop></audio>
 
-    <div class="ttl">
-        <h1>1 Mês de Namoro</h1>
-        <p>A melhor escolha da minha vida</p>
-        <span class="names">Henrique & Mayra</span>
+<div class="ttl">
+    <h1>1 Mês de Namoro</h1>
+    <p>A melhor escolha da minha vida</p>
+    <div style="font-size:2rem; color:var(--gold); margin-top:10px;">Henrique & Mayra 💕</div>
+</div>
+
+<div class="mwrap">
+    <div class="machine" id="machine">
+        <div class="rc">
+            <div class="rwin"><div class="rstrip" id="r1"></div></div>
+            <div class="rwin"><div class="rstrip" id="r2"></div></div>
+            <div class="rwin"><div class="rstrip" id="r3"></div></div>
+        </div>
+        <div style="text-align:center; color:var(--textpink); font-size:0.9rem;">Puxe para ganhar uma surpresa!</div>
     </div>
 
-    <div class="mwrap">
-        <div class="machine" id="machine">
-            <div class="mtop-title">SORTE NO AMOR</div>
-            <div class="rc">
-                <div class="rwin"><div class="rstrip" id="r1"></div></div>
-                <div class="rwin"><div class="rstrip" id="r2"></div></div>
-                <div class="rwin"><div class="rstrip" id="r3"></div></div>
-            </div>
-            <div style="text-align:center">
-                <p style="color:var(--textpink); font-size: 0.9rem; margin-bottom: 10px;">Puxe a alavanca para ganhar uma surpresa!</p>
-            </div>
+    <div class="lever" onclick="pullLever()">
+        <div class="lv-track">
+            <div class="lv-ball" id="lever-ball"></div>
+            <div class="lv-shaft"></div>
         </div>
+        <div style="margin-top:10px; color:var(--gold); font-weight:bold;">PUXE</div>
+    </div>
+</div>
 
-        <div class="lever" onclick="pullLever()">
-            <div class="lv-track">
-                <div class="lv-ball" id="lever-ball"></div>
-                <div class="lv-shaft"></div>
-            </div>
-            <div style="margin-top:10px; color:var(--gold); font-weight:bold;">PUXE</div>
+<div class="win-banner" id="winBanner">VOCÊ GANHOU! ❤️</div>
+
+<div class="loverlay" id="letterOverlay">
+    <div class="letter-card">
+        <button class="close-btn" onclick="closeLetter()">&times;</button>
+        <div class="letter-greeting">Para Henrique & Mayra</div>
+        <div class="letter-body" id="letterBody"></div>
+        <div class="photo-gallery" id="photoGallery">
+            <img src="img/foto1.png">
+            <img src="img/foto2.png">
+            <img src="img/foto3.png">
+            <img src="img/foto4.png">
+            <img src="img/foto5.png">
         </div>
     </div>
+</div>
 
-    <!-- Envelope Section -->
-    <div class="envelope-wrapper" id="envelope-wrapper">
-        <div class="close-envelope" onclick="closeEnvelope()">&times;</div>
-        <div class="envelope" id="envelope" onclick="openLetter()">
-            <div class="top"></div>
-            <div class="left"></div>
-            <div class="bottom"></div>
-            <div class="letter">
-                <div class="letter-content">
-                    <h2 style="color:var(--red); margin-bottom: 10px;">Para o meu amor...</h2>
-                    <p>Henrique e Mayra, 1 mês de muitos que virão. Cada momento ao seu lado é um presente. Você me faz a pessoa mais feliz do mundo!</p>
-                    
-                    <div class="photo-gallery">
-                        <img src="img/foto1.png" alt="Nossa Foto 1">
-                        <img src="img/foto2.png" alt="Nossa Foto 2">
-                        <img src="img/foto3.png" alt="Nossa Foto 3">
-                        <img src="img/foto4.png" alt="Nossa Foto 4">
-                        <img src="img/foto5.png" alt="Nossa Foto 5">
-                    </div>
-                    
-                    <p style="margin-top: 20px; font-size: 1.5rem;">Eu te amo! ❤️</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
+const canvas = document.getElementById('hcanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
 
-    <script>
-        // --- Background Animation ---
-        const bgCanvas = document.getElementById('bg-canvas');
-        const bgCtx = bgCanvas.getContext('2d');
-        let dots = [];
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
 
-        function resize() {
-            bgCanvas.width = window.innerWidth;
-            bgCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
+// Floating Background Hearts
+function createBGHeart(){
+  const h = document.createElement('div');
+  h.className = 'bh';
+  h.innerHTML = ['❤️','💖','💕','💗'][Math.floor(Math.random()*4)];
+  h.style.left = Math.random()*100+'vw';
+  h.style.animationDuration = (Math.random()*3+4)+'s';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(), 7000);
+}
+setInterval(createBGHeart, 500);
 
-        class Dot {
-            constructor() {
-                this.x = Math.random() * bgCanvas.width;
-                this.y = Math.random() * bgCanvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.alpha = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if(this.x < 0 || this.x > bgCanvas.width) this.vx *= -1;
-                if(this.y < 0 || this.y > bgCanvas.height) this.vy *= -1;
-            }
-            draw() {
-                bgCtx.beginPath();
-                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                bgCtx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
-                bgCtx.fill();
-            }
-        }
+// Slot Machine
+const emojis = ['❤️','💍','🌹','✨','🧸','💌'];
+const r1 = document.getElementById('r1');
+const r2 = document.getElementById('r2');
+const r3 = document.getElementById('r3');
 
-        for(let i=0; i<100; i++) dots.push(new Dot());
+function fillReel(reel){
+  reel.innerHTML = '';
+  for(let i=0; i<40; i++){
+    const div = document.createElement('div');
+    div.className = 'rcell';
+    div.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+    reel.appendChild(div);
+  }
+}
+fillReel(r1); fillReel(r2); fillReel(r3);
 
-        function animateBg() {
-            bgCtx.clearRect(0,0,bgCanvas.width, bgCanvas.height);
-            dots.forEach(d => { d.update(); d.draw(); });
-            requestAnimationFrame(animateBg);
-        }
-        animateBg();
+let spinning = false;
+function pullLever(){
+  if(spinning) return;
+  spinning = true;
 
-        // --- Floating Hearts ---
-        function createHeart() {
-            const h = document.createElement('div');
-            h.className = 'bh';
-            h.innerHTML = ['❤️','💖','💕','💗'][Math.floor(Math.random()*4)];
-            h.style.left = Math.random() * 100 + 'vw';
-            h.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 6000);
-        }
-        setInterval(createHeart, 400);
+  const ball = document.getElementById('lever-ball');
+  ball.style.top = '150px';
+  setTimeout(()=> ball.style.top = '10px', 300);
 
-        // --- Slot Machine Logic ---
-        const emojis = ['❤️', '💍', '🌹', '✨', '🧸', '🍫', '💌'];
-        const reels = [document.getElementById('r1'), document.getElementById('r2'), document.getElementById('r3')];
-        
-        function initReels() {
-            reels.forEach(r => {
-                r.innerHTML = '';
-                for(let i=0; i<30; i++) {
-                    const div = document.createElement('div');
-                    div.className = 'rcell';
-                    div.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-                    r.appendChild(div);
-                }
-            });
-        }
-        initReels();
+  const reels = [r1, r2, r3];
+  reels.forEach((r, i)=>{
+    r.style.transition = 'none';
+    r.style.transform = 'translateY(0)';
+    r.offsetHeight; 
+    
+    // Force win
+    r.children[37].innerHTML = '❤️';
+    
+    r.style.transition = `transform ${2 + i}s cubic-bezier(0.45, 0.05, 0.55, 0.95)`;
+    r.style.transform = 'translateY(-2960px)';
+  });
 
-        let spinning = false;
-        function pullLever() {
-            if(spinning) return;
-            spinning = true;
+  setTimeout(()=>{
+    document.getElementById('winBanner').classList.add('show');
+    document.getElementById('machine').classList.add('winning');
+    setTimeout(showLetter, 1500);
+    spinning = false;
+  }, 4500);
+}
 
-            // Lever animation
-            const ball = document.getElementById('lever-ball');
-            ball.style.top = '160px';
-            setTimeout(() => ball.style.top = '0', 300);
+const letterText = `Henrique e Mayra,
 
-            // Spin reels
-            reels.forEach((r, idx) => {
-                r.style.transition = 'none';
-                r.style.transform = 'translateY(0)';
-                
-                // Force reflow
-                r.offsetHeight;
+Feliz 1 mês de namoro! ❤️
 
-                r.style.transition = `transform ${2 + idx}s cubic-bezier(0.45, 0.05, 0.55, 0.95)`;
-                // Set the final result to hearts
-                const children = r.children;
-                children[children.length - 2].innerHTML = '❤️';
-                
-                r.style.transform = `translateY(-${(children.length - 3) * 80}px)`;
-            });
+Desde que vocês começaram essa jornada juntos, o brilho nos olhos e a felicidade são evidentes. Que este seja apenas o primeiro de muitos meses repletos de amor, cumplicidade e momentos inesquecíveis.
 
-            setTimeout(() => {
-                celebrate();
-                spinning = false;
-            }, 5000);
-        }
+Vocês formam um casal incrível e merecem toda a felicidade do mundo. Que o carinho e o respeito continuem sendo a base de tudo o que constroem.
 
-        // --- Celebration & Envelope ---
-        const confettiCanvas = document.getElementById('confetti');
-        const cCtx = confettiCanvas.getContext('2d');
-        let particles = [];
+Com muito amor, seu amigo.`;
 
-        function celebrate() {
-            const wrapper = document.getElementById('envelope-wrapper');
-            wrapper.style.display = 'flex';
-            
-            // Confetti explosion
-            for(let i=0; i<150; i++) {
-                particles.push({
-                    x: window.innerWidth/2,
-                    y: window.innerHeight/2,
-                    vx: (Math.random() - 0.5) * 15,
-                    vy: (Math.random() - 0.5) * 15 - 5,
-                    size: Math.random() * 10 + 5,
-                    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
-                    gravity: 0.2,
-                    life: 1
-                });
-            }
-            animateConfetti();
-        }
+function showLetter(){
+  const overlay = document.getElementById('letterOverlay');
+  const body = document.getElementById('letterBody');
+  const song = document.getElementById('love-song');
+  
+  body.textContent = '';
+  overlay.classList.add('vis');
+  song.play().catch(e => console.log("Audio block: " + e));
 
-        function animateConfetti() {
-            confettiCanvas.width = window.innerWidth;
-            confettiCanvas.height = window.innerHeight;
-            cCtx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
-            
-            particles.forEach((p, i) => {
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vy += p.gravity;
-                p.life -= 0.01;
-                
-                cCtx.fillStyle = p.color;
-                cCtx.globalAlpha = p.life;
-                cCtx.fillRect(p.x, p.y, p.size, p.size);
-                
-                if(p.life <= 0) particles.splice(i, 1);
-            });
+  let i = 0;
+  function type(){
+    if(i < letterText.length){
+      body.textContent += letterText[i++];
+      setTimeout(type, 30);
+    } else {
+      document.getElementById('photoGallery').classList.add('show');
+    }
+  }
+  setTimeout(type, 800);
+}
 
-            if(particles.length > 0) requestAnimationFrame(animateConfetti);
-        }
-
-        function openLetter() {
-            document.getElementById('envelope').classList.add('open');
-            const song = document.getElementById('love-song');
-            song.play().catch(e => console.log("Erro ao tocar música: " + e));
-        }
-
-        function closeEnvelope() {
-            document.getElementById('envelope-wrapper').style.display = 'none';
-            document.getElementById('envelope').classList.remove('open');
-        }
-    </script>
+function closeLetter(){
+  document.getElementById('letterOverlay').classList.remove('vis');
+  document.getElementById('winBanner').classList.remove('show');
+  document.getElementById('machine').classList.remove('winning');
+  document.getElementById('love-song').pause();
+}
+</script>
 </body>
 </html>
